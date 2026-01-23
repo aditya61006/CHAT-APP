@@ -45,7 +45,7 @@ const Login = () => {
 {
     !isDataSubmitted && (
         <>
-        <input onChange={(e)=>setEmail(e.target.value)} value={email} type="text" placeholder='Email Address 'required className='p-2 border-gray-500
+        <input onChange={(e)=>setEmail(e.target.value)} value={email} type="email" placeholder='Email Address 'required className='p-2 border-gray-500
         border rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500'/>
 
        <input onChange={(e)=>setPassword(e.target.value)} value={password} type="password" placeholder='Password 'required className='p-2 border-gray-500
@@ -69,7 +69,7 @@ const Login = () => {
             </button>
             
             <div className='flex items-center gap-2 text-sm text-gray-500'>
-                <input type="checkbox" />
+                <input type="checkbox" required />
                 <p>Agree to the terms of use & privacy policy.</p>
             </div>
 

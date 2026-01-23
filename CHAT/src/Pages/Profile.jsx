@@ -5,14 +5,14 @@ import { AuthContext } from '../../context/AuthContext';
 
 const Profile = () => {
     const {authUser,updateProfile} = useContext(AuthContext);
-    const [selectedImg, setSelectedImg] = useState(null);
+    const [selectedImg, setSelectedImg] = useState();
     const navigate = useNavigate();
-    const [Name, setName] = useState("Martin choudhary");
-    const [bio, setBio] = useState("Hi everyone i am using quick chat");
+    const [Name, setName] = useState(authUser.fullName);
+    const [bio, setBio] = useState(authUser.bio);
     const handleSubmit = async (e)=>{
         e.preventDefault();
         if (!selectedImg) {
-            await updateProfile({fullName:name,bio})
+            await updateProfile({fullName:Name,bio})
             navigate('/');
             return;
         }
@@ -20,7 +20,7 @@ const Profile = () => {
         reader.readAsDataURL(selectedImg);
         reader.onload = async ()=>{
             const base64Image = reader.result;
-            await updateProfile({profilePic: base64Image,fullName: name, bio});
+            await updateProfile({profilePic: base64Image,fullName:Name, bio});
             navigate('/');
         }
     }
