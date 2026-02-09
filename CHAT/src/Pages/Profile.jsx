@@ -1,18 +1,18 @@
 import React, { useState,useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import assets from '../assets/assets';
-import { AuthContext } from '../../context/AuthContext';
+import { AuthContext } from '../../context/authContext';
 
 const Profile = () => {
     const {authUser,updateProfile} = useContext(AuthContext);
-    const [selectedImg, setSelectedImg] = useState();
+    const [selectedImg, setSelectedImg] = useState(null);
     const navigate = useNavigate();
-    const [Name, setName] = useState(authUser.fullName);
+    const [name, setName] = useState(authUser.fullName);
     const [bio, setBio] = useState(authUser.bio);
     const handleSubmit = async (e)=>{
         e.preventDefault();
         if (!selectedImg) {
-            await updateProfile({fullName:Name,bio})
+            await updateProfile({fullName:name,bio})
             navigate('/');
             return;
         }
@@ -20,7 +20,7 @@ const Profile = () => {
         reader.readAsDataURL(selectedImg);
         reader.onload = async ()=>{
             const base64Image = reader.result;
-            await updateProfile({profilePic: base64Image,fullName:Name, bio});
+            await updateProfile({profilePic: base64Image,fullName:name, bio});
             navigate('/');
         }
     }
@@ -37,7 +37,7 @@ const Profile = () => {
                         upload profile image
                         </label>
 
-                        <input type="text" required selected  select placeholder='Your Name' onChange={(e)=> setName(e.target.value)} value={Name} className='p-2 border border-gray-500 rounded-md
+                        <input type="text" required selected  select placeholder='Your Name' onChange={(e)=> setName(e.target.value)} value={name} className='p-2 border border-gray-500 rounded-md
                         focus: outline-none focus:ring-1 focus:ring-violet-500' />
 
                         <textarea name=""required className='p-2 border border-gray-500 rounded-md
@@ -47,7 +47,8 @@ const Profile = () => {
                         <button type='submit'  className='bg-linear-to-r from-purple-400 to-violet-600
                          text-white p-2 rounded-full text-lg cursor-pointer' >Save</button>
                 </form>
-                <img src={assets.logo_icon} className='max-w-44 aspect-square rounded-full mx-10 max-sm:mt-10' alt="" />
+                <img src={authUser?.profilePic || assets.logo_icon} className={`max-w-44 aspect-square  mx-10 max-sm:mt-10 
+                    ${selectedImg && 'rounded-full'}`} alt="" />
             </div>
             
         </div>

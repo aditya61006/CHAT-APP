@@ -1,6 +1,6 @@
 import React ,{ useState ,useContext }from 'react';
 import assets from '../assets/assets';
-import { AuthContext } from '../../context/AuthContext';
+import { AuthContext } from '../../context/authContext';
 
 const Login = () => {
     const [currState, setCurrState] = useState("Sign up");
@@ -69,7 +69,7 @@ const Login = () => {
             </button>
             
             <div className='flex items-center gap-2 text-sm text-gray-500'>
-                <input type="checkbox" required />
+                <input  type="checkbox" required />
                 <p>Agree to the terms of use & privacy policy.</p>
             </div>
 
