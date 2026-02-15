@@ -3,7 +3,7 @@ import assets, { messagesDummyData } from '../assets/assets';
 import { useRef } from 'react';
 import { formatMessageTime } from '../Lib/utils';
 import { ChatContext } from '../../context/chatContext';
-import { AuthContext } from '../../context/authContext';
+import { AuthContext } from '../../context/AuthContext';
 import toast from 'react-hot-toast';
 
 const ChatContainer = () => {
